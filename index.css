@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-cyber-bg: #050A15;
+  --color-cyber-cyan: #00E5FF;
+  --color-cyber-green: #00FF66;
+  --color-cyber-purple: #A855F7;
+  --color-cyber-border: rgba(0, 229, 255, 0.1);
+
+  --animate-pulse-red: breathing 4s ease-in-out infinite;
+  --animate-flow: flow 2s linear infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-loading-bar: loading-bar 1.5s infinite linear;
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-scanline: scanline 8s linear infinite;
+
+  @keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes loading-bar {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  @keyframes breathing {
+    0%, 100% { transform: scale(1); opacity: 0.4; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+  }
+  @keyframes flow {
+    0% { stroke-dashoffset: 20; }
+    100% { stroke-dashoffset: 0; }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(0, 229, 255, 0.1); border-color: rgba(0, 229, 255, 0.2); }
+    50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.4); border-color: rgba(168, 85, 247, 0.6); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-cyber-bg text-white overflow-x-hidden selection:bg-cyber-cyan/30;
+  }
+  
+  a, button, [role="button"] {
+    @apply cursor-auto;
+  }
+}
+
+@layer components {
+  .cyber-grid {
+    background-image: 
+      linear-gradient(to right, rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 229, 255, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    @apply fixed inset-0 z-0 pointer-events-none;
+  }
+
+  .cyber-vignette {
+    background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(5, 10, 21, 0.8) 100%);
+    @apply fixed inset-0 z-0 pointer-events-none;
+  }
+
+  .cyber-card {
+    background: rgba(10, 20, 40, 0.6);
+    @apply rounded-lg border border-cyber-cyan/10 backdrop-blur-md transition-all duration-300 ease-out;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .cyber-card:hover {
+    @apply border-cyber-cyan/30 -translate-y-0.5;
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.1);
+  }
+
+  .cyber-button {
+    @apply px-4 py-2 rounded border border-cyber-cyan/20 bg-cyber-cyan/5 text-cyber-cyan font-mono text-xs uppercase tracking-widest transition-all duration-200 hover:bg-cyber-cyan/20 hover:border-cyber-cyan/50 active:scale-95;
+  }
+
+  .cyber-input {
+    @apply bg-black/40 border border-cyber-cyan/20 rounded px-3 py-2 text-white font-mono text-sm focus:outline-none focus:border-cyber-cyan/50 transition-all;
+  }
+}
+
+@layer utilities {
+  .font-data {
+    @apply font-mono;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-cyber-bg;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-cyber-cyan/20 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-cyber-cyan/40;
+  }
+}
